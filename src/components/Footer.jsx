@@ -4,12 +4,12 @@ import { BsFacebook, BsGoogle, BsTwitter } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-600 dark:bg-gray-800">
+    <footer className="bg-gray-500 dark:bg-gray-800">
       <div className="max-w-7xl py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           <div className="col-span-2">
             <Logo />
-            <p className="mt-4 text-gray-400">
+            <p className="mt-4 text-gray-300">
               Unleash the Power of Innovation with Our Wide Range of
               Cutting-Edge Electronics. From Smart Home Solutions to Personal
               Gadgets, We&apos;ve Got Your Tech Needs Covered.
@@ -17,32 +17,32 @@ const Footer = () => {
           </div>
 
           <div className="col-span-1">
-            <h4 className="font-semibold text-gray-100">Product</h4>
+            <h4 className="font-semibold text-gray-100">Important Links</h4>
 
             <div className="mt-3 grid space-y-3">
               <p>
-                <a
-                  className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                  href="#"
+                <Link
+                  className="inline-flex gap-x-2 text-gray-300 hover:text-gray-200"
+                  to="/"
                 >
-                  Pricing
-                </a>
+                  Home
+                </Link>
               </p>
               <p>
-                <a
-                  className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                  href="#"
+                <Link
+                  className="inline-flex gap-x-2 text-gray-300 hover:text-gray-200"
+                  to="/login"
                 >
-                  Changelog
-                </a>
+                  Login
+                </Link>
               </p>
               <p>
-                <a
-                  className="inline-flex gap-x-2 text-gray-400 hover:text-gray-200"
-                  href="#"
+                <Link
+                  className="inline-flex gap-x-2 text-gray-300 hover:text-gray-200"
+                  to="/cart"
                 >
-                  Docs
-                </a>
+                  Cart
+                </Link>
               </p>
             </div>
           </div>
@@ -74,7 +74,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-5 sm:mt-12 text-center">
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-300">
             &copy; 2023{" "}
             <Link className="underline" to="/">
               Electra
