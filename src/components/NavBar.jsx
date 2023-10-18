@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "/electra-logo.png";
 import "./../themes/ThemeToggle";
+import Logo from "./Logo";
 
 const NavBar = () => {
   return (
@@ -11,14 +11,7 @@ const NavBar = () => {
           aria-label="Global"
         >
           <div className="flex items-center justify-between">
-            <Link
-              className="flex items-center gap-1 font-mono text-xl font-semibold dark:text-white"
-              to="/"
-              aria-label="Brand"
-            >
-              <img className="h-8" src={logo} alt="" />
-              <span>Electro</span>
-            </Link>
+            <Logo />
             <div className="sm:hidden">
               <button
                 type="button"

@@ -14,7 +14,7 @@ const Banner = () => {
         <h1 className="text-2xl md:text-5xl font-bold max-w-2xl">
           Your Gateway to Tech Wonders.
         </h1>
-        <p className="max-w-xl">
+        <p className="max-w-xl text-sm sm:text-base">
           Unleash the Power of Innovation with Our Wide Range of Cutting-Edge
           Electronics. From Smart Home Solutions to Personal Gadgets, We&apos;ve
           Got Your Tech Needs Covered.
