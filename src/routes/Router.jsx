@@ -5,6 +5,7 @@ import AddProduct from "../pages/AddProduct";
 import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import ErrorPage from "../pages/ErrorPage";
+import Register from "../pages/Register";
 
 const Router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const Router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
     ],
   },
