@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, googleSignIn } = useContext(AuthContext);
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -14,6 +14,17 @@ const Register = () => {
     console.log(name, email, password);
 
     createUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
@@ -112,6 +123,7 @@ const Register = () => {
       </div>
       <div className="mt-8 grid">
         <button
+          onClick={handleGoogleSignIn}
           type="button"
           className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm sm:p-4 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
         >
