@@ -3,6 +3,8 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import toast from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
+import auth from "../firebase/firebase.config";
 
 const Register = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
@@ -11,6 +13,7 @@ const Register = () => {
     const form = event.target;
 
     const name = form.name.value;
+    const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
 
@@ -32,6 +35,16 @@ const Register = () => {
         const user = userCredential.user;
         console.log(user);
         toast.success("Register Successfully!");
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {})
+          .catch((error) => {
+            toast.error(error.message);
+          });
+        user.displayName = name;
+        user.photoURL = photo;
       })
       .catch((error) => {
         toast.error(error.message);
@@ -58,6 +71,22 @@ const Register = () => {
             name="name"
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="Name"
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            htmlFor="photo"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Your photo url
+          </label>
+          <input
+            type="text"
+            id="photo"
+            name="photo"
+            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            placeholder="Photo url"
             required
           />
         </div>
