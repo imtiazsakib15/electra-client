@@ -1,5 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { Link } from "react-router-dom";
+import Button from "../components/Button";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
@@ -11,15 +14,27 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(name, email, password);
+    if (password.length < 6) {
+      toast.error("Password have at least 6 characters");
+      return;
+    }
+    if (!/[^a-zA-Z0-9]/.test(password)) {
+      toast.error("Password should have at least one special character");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      toast.error("Password should have at least one upper case character");
+      return;
+    }
 
     createUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        toast.success('Register Successfully!')
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error(error.message);
       });
   };
 
@@ -28,9 +43,10 @@ const Register = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        toast.success('Sign In Successfully!')
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error(error.message);
       });
   };
 
@@ -103,20 +119,25 @@ const Register = () => {
             className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
             I agree with the{" "}
-            <a
-              href="#"
+            <Link
+              to="/register"
               className="text-blue-600 hover:underline dark:text-blue-500"
             >
               terms and conditions
-            </a>
+            </Link>
           </label>
         </div>
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Register new account
-        </button>
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <button type="submit">
+            <Button>Register new account</Button>
+          </button>
+          <p className="text-sm mt-4 sm:mt-0 text-gray-900 dark:text-gray-300 font-medium">
+            Already Have an account?{" "}
+            <Link className="text-blue-600 hover:underline" to="/login">
+              Login now
+            </Link>
+          </p>
+        </div>
       </form>
       <div className="py-6 flex items-center text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:mr-6 after:flex-[1_1_0%] after:border-t after:ml-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
         Or
@@ -151,7 +172,7 @@ const Register = () => {
               fill="#EB4335"
             />
           </svg>
-          Sign up with Google
+          Sign in with Google
         </button>
       </div>
     </div>
