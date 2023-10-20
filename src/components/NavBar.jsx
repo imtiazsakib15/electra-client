@@ -7,12 +7,13 @@ import Button from "./Button";
 import toast from "react-hot-toast";
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, setUser, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
     logOut()
       .then(() => {
         toast.success("Log out Successfully!");
+        setUser(null);
       })
       .catch((error) => {
         toast.error(error.message);

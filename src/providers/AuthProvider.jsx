@@ -28,6 +28,7 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
   const googleSignIn = () => {
+    setLoading(true);
     signInWithPopup(auth, googleProvider)
       .then(() => {
         toast.success("Sign In Successfully!");
@@ -43,16 +44,24 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        console.log(currentUser);
-        setUser(currentUser);
-        setLoading(false);
-      } else setUser(null);
+      console.log(currentUser);
+      setUser(currentUser);
+      setLoading(false);
     });
-    return () => unSubscribe();
+    return () => {
+      unSubscribe();
+    };
   }, []);
 
-  const authInfo = { user, loading, createUser, signIn, googleSignIn, logOut };
+  const authInfo = {
+    user,
+    setUser,
+    loading,
+    createUser,
+    signIn,
+    googleSignIn,
+    logOut,
+  };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
