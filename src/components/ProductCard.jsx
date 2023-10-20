@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import ReactStars from "react-rating-stars-component";
 
 const ProductCard = ({ product }) => {
-  const { image, name, brand_name, type, price, rating } = product;
+  const { _id, image, name, brand_name, type, price, rating } = product;
+
   return (
     <div className="border rounded-md shadow-md text-center font-medium space-y-4 p-6 text-gray-900 dark:text-gray-200 bg-gray-100 dark:bg-gray-600">
       <img className="mx-auto h-60" src={image} alt="" />
@@ -13,11 +15,23 @@ const ProductCard = ({ product }) => {
         <p>Type: {type}</p>
       </div>
       <div className="flex justify-between">
-        <p>price: ${price}</p>
-        <p>Rating: {rating}</p>
+        <p>${price}</p>
+        <ReactStars
+          count={5}
+          size={22}
+          value={parseFloat(rating)}
+          edit={false}
+          isHalf={true}
+          emptyIcon={<i className="far fa-star"></i>}
+          halfIcon={<i className="fa fa-star-half-alt"></i>}
+          fullIcon={<i className="fa fa-star"></i>}
+          activeColor="#ffa142"
+        />
       </div>
       <div className="flex justify-between">
-        <Link>
+        <Link
+          to={`/${brand_name}/products/${name.split(" ").join("-")}/${_id}`}
+        >
           <Button>View Details</Button>
         </Link>
         <Link>

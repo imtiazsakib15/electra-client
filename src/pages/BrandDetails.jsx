@@ -13,7 +13,7 @@ const BrandDetails = () => {
         setProducts(data);
       });
   }, [params.brand]);
-  console.log(products);
+  
   return (
     <div className="dark:bg-gray-800">
       <div className="max-w-7xl py-10 px-4 sm:px-6 lg:px-8 lg:pt-20 mx-auto">
