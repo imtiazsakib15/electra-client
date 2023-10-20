@@ -6,6 +6,7 @@ import Cart from "../pages/Cart";
 import Login from "../pages/Login";
 import ErrorPage from "../pages/ErrorPage";
 import Register from "../pages/Register";
+import BrandDetails from "../pages/BrandDetails";
 
 const Router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const Router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/:brand/products",
+        element: <BrandDetails />,
       },
     ],
   },

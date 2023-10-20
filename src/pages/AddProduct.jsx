@@ -23,7 +23,6 @@ const AddProduct = () => {
       image,
       description,
     };
-    console.log(product);
 
     Swal.fire({
       title: "Do you want to add new product?",
@@ -43,6 +42,7 @@ const AddProduct = () => {
           .then((res) => res.json())
           .then((data) => {
             if (data.insertedId) Swal.fire("Product added!", "", "success");
+            form.reset();
           });
       } else if (result.isDenied) {
         Swal.fire("Product is not added", "", "info");
@@ -51,136 +51,138 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="max-w-5xl pt-28 px-4 sm:px-6 lg:px-8 lg:pt-36 pb-14 mx-auto">
-      <h2 className="text-4xl font-semibold dark:text-white text-center">
-        Add New Product
-      </h2>
-      <div className="border-2 border-blue-800 w-28 mt-1 mx-auto mb-8"></div>
-      <form onSubmit={handleAddProduct}>
-        <div className="mb-6">
-          <label
-            htmlFor="name"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Product name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="name"
-            required
-          />
-        </div>
-        <div className="grid gap-6 mb-6 md:grid-cols-2">
-          <div>
+    <div className="dark:bg-gray-800">
+      <div className="max-w-5xl pt-28 px-4 sm:px-6 lg:px-8 lg:pt-36 pb-14 mx-auto">
+        <h2 className="text-4xl font-semibold dark:text-white text-center">
+          Add New Product
+        </h2>
+        <div className="border-2 border-blue-800 w-28 mt-1 mx-auto mb-8"></div>
+        <form onSubmit={handleAddProduct}>
+          <div className="mb-6">
             <label
-              htmlFor="type"
+              htmlFor="name"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Product type
+              Product name
             </label>
             <input
               type="text"
-              id="type"
-              name="type"
+              id="name"
+              name="name"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Phone, Computer, Headphone etc"
+              placeholder="name"
               required
             />
           </div>
-          <div>
-            <label
-              htmlFor="brand_name"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Select a brand
-            </label>
-            <select
-              id="brand_name"
-              name="brand_name"
-              defaultValue="Choose a brand"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            >
-              {/* <option value={undefined} selected>Choose a brand</option> */}
-              <option value="Apple">Apple</option>
-              <option value="Samsung">Samsung</option>
-              <option value="Google">Google</option>
-              <option value="Xiaomi">Xiaomi</option>
-              <option value="Huawei">Huawei</option>
-              <option value="Dell">Dell</option>
-            </select>
+          <div className="grid gap-6 mb-6 md:grid-cols-2">
+            <div>
+              <label
+                htmlFor="type"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Product type
+              </label>
+              <input
+                type="text"
+                id="type"
+                name="type"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Phone, Computer, Headphone etc"
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="brand_name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Select a brand
+              </label>
+              <select
+                id="brand_name"
+                name="brand_name"
+                defaultValue="Choose a brand"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {/* <option value={undefined} selected>Choose a brand</option> */}
+                <option value="Apple">Apple</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Google">Google</option>
+                <option value="Xiaomi">Xiaomi</option>
+                <option value="Huawei">Huawei</option>
+                <option value="Dell">Dell</option>
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="price"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Product price
+              </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="rating"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Product rating
+              </label>
+              <input
+                type="number"
+                id="rating"
+                name="rating"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder=""
+                required
+              />
+            </div>
           </div>
-          <div>
+          <div className="mb-6">
             <label
-              htmlFor="price"
+              htmlFor="image"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Product price
+              Photo url
             </label>
             <input
-              type="number"
-              id="price"
-              name="price"
+              type="text"
+              id="image"
+              name="image"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder=""
+              placeholder="Photo url"
               required
             />
           </div>
-          <div>
+          <div className="mb-6">
             <label
-              htmlFor="rating"
+              htmlFor="description"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Product rating
+              Short description
             </label>
-            <input
-              type="number"
-              id="rating"
-              name="rating"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder=""
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Write about product..."
               required
-            />
+            ></textarea>
           </div>
-        </div>
-        <div className="mb-6">
-          <label
-            htmlFor="image"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Photo url
-          </label>
-          <input
-            type="text"
-            id="image"
-            name="image"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Photo url"
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            htmlFor="description"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Short description
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            rows="4"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Write about product..."
-            required
-          ></textarea>
-        </div>
-        <button type="submit">
-          <Button>Add product</Button>
-        </button>
-      </form>
+          <button type="submit">
+            <Button>Add product</Button>
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

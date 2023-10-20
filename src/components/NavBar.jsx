@@ -144,6 +144,9 @@ const NavBar = () => {
 
               {user ? (
                 <>
+                  <div onClick={handleLogOut} className="p-2">
+                    <Button>Log Out</Button>
+                  </div>
                   <div className="flex flex-col items-center">
                     <img
                       className="w-7 h-7 rounded-full border-2 border-blue-600"
@@ -153,9 +156,6 @@ const NavBar = () => {
                     <span className="text-xs dark:text-gray-400">
                       {user.displayName}
                     </span>
-                  </div>
-                  <div onClick={handleLogOut} className="p-2">
-                    <Button>Log Out</Button>
                   </div>
                 </>
               ) : (

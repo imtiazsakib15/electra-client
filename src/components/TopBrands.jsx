@@ -18,10 +18,10 @@ const TopBrands = () => {
           <Link
             to={`/${brand.name}/products`}
             key={brand._id}
-            className="bg-gray-200 p-10 rounded"
+            className="bg-gray-200 dark:bg-gray-600 p-10 rounded"
           >
             <img className="mx-auto" src={brand?.image} alt={brand?.name} />
-            <h5>{brand?.name}</h5>
+            <h5 className="text-lg font-semibold text-gray-700 dark:text-gray-200">{brand?.name}</h5>
           </Link>
         ))}
       </div>
