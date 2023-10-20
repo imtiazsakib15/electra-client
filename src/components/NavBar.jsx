@@ -7,13 +7,12 @@ import Button from "./Button";
 import toast from "react-hot-toast";
 
 const NavBar = () => {
-  const { user, setUser, logOut } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
     logOut()
       .then(() => {
         toast.success("Log out Successfully!");
-        setUser(null);
       })
       .catch((error) => {
         toast.error(error.message);
@@ -99,7 +98,7 @@ const NavBar = () => {
             id="navbar-collapse-with-animation"
             className="hs-collapse hidden overflow-hidden transition-all duration-300 sm:block"
           >
-            <div className="flex flex-col lg:text-base font-medium gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:pl-7">
+            <div className="flex flex-col lg:text-base font-medium gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-5 sm:mt-0 sm:pl-7">
               <NavLink
                 className={({ isActive }) =>
                   isActive
