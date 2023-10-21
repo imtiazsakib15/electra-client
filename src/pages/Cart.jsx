@@ -13,7 +13,7 @@ const Cart = () => {
       });
   }, [user.email]);
   const cartProducts = cartDetails?.cartProducts;
-  //   console.log(cartProducts);
+    // console.log(cartProducts);
 
   return (
     <div className="dark:bg-gray-800">

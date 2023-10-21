@@ -6,7 +6,17 @@ import ReactStars from "react-rating-stars-component";
 const ProductCard = ({ product, quantity }) => {
   const location = useLocation();
   const { _id, image, name, brand_name, type, price, rating } = product;
-  console.log(location.pathname === "/cart");
+  // console.log(product);
+  const handleDelete = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
   return (
     <div className="border rounded-md shadow-md text-center font-medium space-y-4 p-6 text-gray-900 dark:text-gray-200 bg-gray-100 dark:bg-gray-600">
@@ -34,7 +44,10 @@ const ProductCard = ({ product, quantity }) => {
         {location.pathname === "/cart" ? (
           <>
             <p className="text-xl font-semibold">Quantity: {quantity}</p>
-            <button className="bg-red-600 hover:bg-red-700 px-6 py-2 text-white rounded-full">
+            <button
+              onClick={() => handleDelete(_id)}
+              className="bg-red-600 hover:bg-red-700 px-6 py-2 text-white rounded-full"
+            >
               Delete
             </button>
           </>

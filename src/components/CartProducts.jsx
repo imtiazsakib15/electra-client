@@ -11,7 +11,7 @@ const CartProducts = ({productDetail}) => {
             setProduct(data);
         })
     },[productDetail.productId]);
-    console.log(productDetail.quantity);
+    // console.log(productDetail);
     return (
         product&&<ProductCard product={product} quantity={productDetail.quantity} />
     );
