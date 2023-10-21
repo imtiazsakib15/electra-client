@@ -9,7 +9,6 @@ import {
   signOut,
 } from "firebase/auth";
 import PropTypes from "prop-types";
-import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 
@@ -29,13 +28,8 @@ const AuthProvider = ({ children }) => {
   };
   const googleSignIn = () => {
     setLoading(true);
-    signInWithPopup(auth, googleProvider)
-      .then(() => {
-        toast.success("Sign In Successfully!");
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    return signInWithPopup(auth, googleProvider)
+      
   };
   const logOut = () => {
     setLoading(true);

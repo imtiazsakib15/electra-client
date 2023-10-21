@@ -1,21 +1,35 @@
 import toast from "react-hot-toast";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
-
     const email = form.email.value;
     const password = form.password.value;
 
     signIn(email, password)
       .then(() => {
         toast.success("Sign In Successfully!");
+        navigate(location.state ? location.state : "/");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then(() => {
+        toast.success("Sign In Successfully!");
+        navigate(location.state ? location.state : "/");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -79,7 +93,7 @@ const Login = () => {
         </div>
         <div className="mt-8 grid">
           <button
-            onClick={() => googleSignIn()}
+            onClick={handleGoogleSignIn}
             type="button"
             className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm sm:p-4 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
           >
