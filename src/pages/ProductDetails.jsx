@@ -11,7 +11,7 @@ const ProductDetails = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/${params.brand}/products/${params.id}`)
+    fetch(`http://localhost:5000/products/${params.id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [params.brand, params.id]);
@@ -20,12 +20,9 @@ const ProductDetails = () => {
   const email = user.email;
 
   const handleAddToCart = (id) => {
-    console.log(id);
     fetch(`http://localhost:5000/cart/${email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.cartProducts);
-
         const previousCartProducts = data.cartProducts;
         let cartProducts;
         previousCartProducts
@@ -51,8 +48,8 @@ const ProductDetails = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-            if(data.upsertedCount || data.modifiedCount) toast.success('Successfully add to cart!')
+            if (data.upsertedCount || data.modifiedCount)
+              toast.success("Successfully add to cart!");
           });
       });
   };
