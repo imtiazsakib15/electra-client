@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import Button from "../components/Button";
 import { AuthContext } from "../providers/AuthProvider";
+import toast from "react-hot-toast";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -18,16 +19,53 @@ const ProductDetails = () => {
     product;
   const email = user.email;
 
+  // const handleAddToCart = (id) => {
+  //   console.log(id);
+  //   fetch(`http://localhost:5000/cart/${email}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data.cartProducts);
+  //       let cartProducts;
+  //       data.cartProducts
+  //         ? (cartProducts = [...data.cartProducts, id])
+  //         : (cartProducts = [id]);
+
+  //       const cartDetails = { email, cartProducts };
+
+  //       fetch("http://localhost:5000/cart", {
+  //         method: "PATCH",
+  //         headers: {
+  //           "content-type": "application/json",
+  //         },
+  //         body: JSON.stringify(cartDetails),
+  //       })
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log(data);
+  //         });
+  //     });
+  // };
+
   const handleAddToCart = (id) => {
     console.log(id);
     fetch(`http://localhost:5000/cart/${email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.cartProducts);
+
+        const previousCartProducts = data.cartProducts;
         let cartProducts;
-        data.cartProducts
-          ? (cartProducts = [...data.cartProducts, id])
-          : (cartProducts = [id]);
+        previousCartProducts
+          ? previousCartProducts.find((product) => product.productId == id)
+            ? (cartProducts = previousCartProducts.map((product) => {
+                product.productId == id && (product.quantity += 1);
+                return product;
+              }))
+            : (cartProducts = [
+                ...data.cartProducts,
+                { productId: id, quantity: 1 },
+              ])
+          : (cartProducts = [{ productId: id, quantity: 1 }]);
 
         const cartDetails = { email, cartProducts };
 
@@ -41,40 +79,10 @@ const ProductDetails = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+            if(data.upsertedCount || data.modifiedCount) toast.success('Successfully add to cart!')
           });
       });
   };
-
-  // const handleAddToCart = (id) => {
-  //   console.log(id);
-  //   fetch(`http://localhost:5000/cart/${email}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data.cartProducts);
-
-  //       const previousCartProducts = data.cartProducts;
-  //       let cartProducts;
-  //       previousCartProducts
-  //         ? { cartProducts = previousCartProducts.map(product => product.productId === id&& product.quantity +=1)
-  //                     //  cartProducts = [...data.cartProducts, { productId: id, quantity: 3 }]
-  //                     }
-  //         : (cartProducts = [{ productId: id, quantity: 1 }]);
-
-  //       // const cartDetails = { email, cartProducts };
-
-  //       fetch("http://localhost:5000/cart", {
-  //         method: "PATCH",
-  //         headers: {
-  //           "content-type": "application/json",
-  //         },
-  //         // body: JSON.stringify(cartDetails),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           console.log(data);
-  //         });
-  //     });
-  // };
 
   window.scrollTo(0, 0);
 

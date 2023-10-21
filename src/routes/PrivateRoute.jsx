@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
- const location = useLocation(); console.log(location);
+ const location = useLocation();
   if (loading)
     return (
       <div className="h-screen grid place-items-center">
