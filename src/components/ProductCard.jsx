@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Button from "./Button";
 import ReactStars from "react-rating-stars-component";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, quantity }) => {
+  const location = useLocation();
   const { _id, image, name, brand_name, type, price, rating } = product;
+  console.log(location.pathname === "/cart");
 
   return (
     <div className="border rounded-md shadow-md text-center font-medium space-y-4 p-6 text-gray-900 dark:text-gray-200 bg-gray-100 dark:bg-gray-600">
@@ -28,23 +30,35 @@ const ProductCard = ({ product }) => {
           activeColor="#ffa142"
         />
       </div>
-      <div className="flex justify-between">
-        <Link
-          to={`/${brand_name}/products/${name.split(" ").join("-")}/${_id}`}
-        >
-          <Button>View Details</Button>
-        </Link>
-        <Link to={`/${brand_name}/products/${_id}/update`}>
-          <button className="text-gray-900 dark:text-gray-200 hover:text-white text-sm font-bold hover:bg-gradient-to-tl hover:from-blue-600 hover:to-violet-600 border-2 border-blue-600 shadow-lg shadow-transparent hover:shadow-blue-700/50  rounded-full py-3 px-6">
-            Update
-          </button>
-        </Link>
+      <div className="flex items-center justify-between">
+        {location.pathname === "/cart" ? (
+          <>
+            <p className="text-xl font-semibold">Quantity: {quantity}</p>
+            <button className="bg-red-600 hover:bg-red-700 px-6 py-2 text-white rounded-full">
+              Delete
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              to={`/${brand_name}/products/${name.split(" ").join("-")}/${_id}`}
+            >
+              <Button>View Details</Button>
+            </Link>
+            <Link to={`/${brand_name}/products/${_id}/update`}>
+              <button className="text-gray-900 dark:text-gray-200 hover:text-white text-sm font-bold hover:bg-gradient-to-tl hover:from-blue-600 hover:to-violet-600 border-2 border-blue-600 shadow-lg shadow-transparent hover:shadow-blue-700/50  rounded-full py-3 px-6">
+                Update
+              </button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
 };
 ProductCard.propTypes = {
   product: PropTypes.object,
+  quantity: PropTypes.number,
 };
 
 export default ProductCard;

@@ -19,33 +19,6 @@ const ProductDetails = () => {
     product;
   const email = user.email;
 
-  // const handleAddToCart = (id) => {
-  //   console.log(id);
-  //   fetch(`http://localhost:5000/cart/${email}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data.cartProducts);
-  //       let cartProducts;
-  //       data.cartProducts
-  //         ? (cartProducts = [...data.cartProducts, id])
-  //         : (cartProducts = [id]);
-
-  //       const cartDetails = { email, cartProducts };
-
-  //       fetch("http://localhost:5000/cart", {
-  //         method: "PATCH",
-  //         headers: {
-  //           "content-type": "application/json",
-  //         },
-  //         body: JSON.stringify(cartDetails),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           console.log(data);
-  //         });
-  //     });
-  // };
-
   const handleAddToCart = (id) => {
     console.log(id);
     fetch(`http://localhost:5000/cart/${email}`)
