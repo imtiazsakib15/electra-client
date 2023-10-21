@@ -12,6 +12,7 @@ const ProductDetails = () => {
       .then((data) => setProduct(data));
   }, [params.brand, params.id]);
   const { name, type, brand_name, price, rating, image, description } = product;
+  window.scrollTo(0, 0);
 
   return (
     <div className="dark:bg-gray-800">

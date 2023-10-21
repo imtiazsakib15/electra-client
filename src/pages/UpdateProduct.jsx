@@ -62,6 +62,7 @@ const UpdateProduct = () => {
       }
     });
   };
+  window.scrollTo(0, 0);
 
   return (
     <div className="dark:bg-gray-800">

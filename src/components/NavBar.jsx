@@ -61,7 +61,7 @@ const NavBar = () => {
             </div>
           </div>
 
-          <div className="cursor-pointer sm:my-6">
+          <div className="cursor-pointer absolute sm:relative top-2 sm:top-auto left-48 z-10 sm:left-auto sm:my-6">
             <span
               className="hs-dark-mode-active:hidden hs-dark-mode group flex items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500"
               data-hs-theme-click-value="dark"
