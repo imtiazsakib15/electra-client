@@ -11,7 +11,9 @@ const ProductDetails = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${params.id}`)
+    fetch(
+      `https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/products/${params.id}`
+    )
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [params.brand, params.id]);
@@ -20,7 +22,9 @@ const ProductDetails = () => {
   const email = user.email;
 
   const handleAddToCart = (id) => {
-    fetch(`http://localhost:5000/cart/${email}`)
+    fetch(
+      `https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/cart/${email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         const previousCartProducts = data.cartProducts;
@@ -39,13 +43,16 @@ const ProductDetails = () => {
 
         const cartDetails = { email, cartProducts };
 
-        fetch("http://localhost:5000/cart", {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(cartDetails),
-        })
+        fetch(
+          "https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/cart",
+          {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(cartDetails),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.upsertedCount || data.modifiedCount)

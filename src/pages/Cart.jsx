@@ -7,7 +7,9 @@ const Cart = () => {
   const { user } = useContext(AuthContext);
   const [cartProducts, setCartProducts] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/cart/${user.email}`)
+    fetch(
+      `https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/cart/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setCartProducts(data?.cartProducts || []);
@@ -15,7 +17,9 @@ const Cart = () => {
   }, [user.email]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/cart/${user.email}`)
+    fetch(
+      `https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/cart/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         const previousCartProducts = data.cartProducts;
@@ -26,13 +30,16 @@ const Cart = () => {
 
         const cartDetails = { email: user.email, cartProducts };
 
-        fetch("http://localhost:5000/cart", {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(cartDetails),
-        })
+        fetch(
+          "https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/cart",
+          {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(cartDetails),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.modifiedCount) toast.success("Deleted Successfully!");

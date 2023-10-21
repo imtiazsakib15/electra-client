@@ -7,7 +7,9 @@ const UpdateProduct = () => {
   const params = useParams();
   const [product, setProduct] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${params.id}`)
+    fetch(
+      `https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/products/${params.id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -43,13 +45,16 @@ const UpdateProduct = () => {
       denyButtonText: `Don't update`,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/products/${params.id}/update`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(product),
-        })
+        fetch(
+          `https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/products/${params.id}/update`,
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(product),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.modifiedCount) {

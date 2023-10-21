@@ -32,13 +32,16 @@ const AddProduct = () => {
       denyButtonText: `Don't add`,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch("http://localhost:5000/products", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(product),
-        })
+        fetch(
+          "https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/products",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(product),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.insertedId) Swal.fire("Product added!", "", "success");

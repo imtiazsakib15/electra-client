@@ -9,7 +9,9 @@ const BrandDetails = () => {
   const brandName = params.brand;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/${brandName}/products`)
+    fetch(
+      `https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/${brandName}/products`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

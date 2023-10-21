@@ -5,7 +5,9 @@ import ProductCard from "./ProductCard";
 const CartProducts = ({ productDetail, handleDelete }) => {
   const [product, setProduct] = useState(null);
   useEffect(() => {
-    fetch(`http://localhost:5000/products/${productDetail.productId}`)
+    fetch(
+      `https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/products/${productDetail.productId}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);

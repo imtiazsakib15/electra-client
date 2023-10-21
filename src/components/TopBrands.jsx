@@ -6,7 +6,9 @@ const TopBrands = () => {
   const [brands, setBrands] = useState([]);
   const [loadBrands, setLoadBrands] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/brands")
+    fetch(
+      "https://electra-server-liwy2mmfi-imtiaz-ahmeds-projects.vercel.app/brands"
+    )
       .then((res) => res.json())
       .then((data) => {
         setBrands(data);
