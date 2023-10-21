@@ -1,17 +1,81 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import Button from "../components/Button";
+import { AuthContext } from "../providers/AuthProvider";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const params = useParams();
+  const { user } = useContext(AuthContext);
+
   useEffect(() => {
     fetch(`http://localhost:5000/${params.brand}/products/${params.id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [params.brand, params.id]);
-  const { name, type, brand_name, price, rating, image, description } = product;
+  const { _id, name, type, brand_name, price, rating, image, description } =
+    product;
+  const email = user.email;
+
+  const handleAddToCart = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/cart/${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.cartProducts);
+        let cartProducts;
+        data.cartProducts
+          ? (cartProducts = [...data.cartProducts, id])
+          : (cartProducts = [id]);
+
+        const cartDetails = { email, cartProducts };
+
+        fetch("http://localhost:5000/cart", {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(cartDetails),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      });
+  };
+
+  // const handleAddToCart = (id) => {
+  //   console.log(id);
+  //   fetch(`http://localhost:5000/cart/${email}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data.cartProducts);
+
+  //       const previousCartProducts = data.cartProducts;
+  //       let cartProducts;
+  //       previousCartProducts
+  //         ? { cartProducts = previousCartProducts.map(product => product.productId === id&& product.quantity +=1)
+  //                     //  cartProducts = [...data.cartProducts, { productId: id, quantity: 3 }]
+  //                     }
+  //         : (cartProducts = [{ productId: id, quantity: 1 }]);
+
+  //       // const cartDetails = { email, cartProducts };
+
+  //       fetch("http://localhost:5000/cart", {
+  //         method: "PATCH",
+  //         headers: {
+  //           "content-type": "application/json",
+  //         },
+  //         // body: JSON.stringify(cartDetails),
+  //       })
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log(data);
+  //         });
+  //     });
+  // };
+
   window.scrollTo(0, 0);
 
   return (
@@ -45,15 +109,15 @@ const ProductDetails = () => {
           </span>
         )}
         <p>
-          <span className="text-lg font-semibold">Price:</span> ${price}
+          <span className="font-semibold">Price:</span> ${price}
         </p>
         <p>
           <span className="font-semibold">Description: </span>
           {description}
         </p>
-        <Link className="block w-max">
+        <button onClick={() => handleAddToCart(_id)}>
           <Button>Add To Cart</Button>
-        </Link>
+        </button>
       </div>
     </div>
   );

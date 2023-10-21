@@ -33,7 +33,7 @@ const Slider = ({ sliderImg }) => {
   );
 };
 Slider.propTypes = {
-  SliderImg: PropTypes.array,
+  sliderImg: PropTypes.array,
 };
 
 export default Slider;
