@@ -13,3 +13,21 @@ Live link of this website - https://electra-2351c.web.app
 - A user can add products to cart
 
 - A user can delete any product from the cart
+
+## Technologies Used In This Website
+
+- React
+
+- React Router Dom
+
+- JavaScript
+
+- Tailwind CSS
+
+- Node Js
+
+- Express Js
+
+- MongoDb
+
+- Firebase
